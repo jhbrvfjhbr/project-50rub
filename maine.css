@@ -12,6 +12,15 @@ body {
     height: 100vh;
 }
 
+.bots-container{
+    width: 500px;
+    height: 500px;
+    top: 100px;
+    left: 750px;
+    text-align: left; 
+    position: absolute;
+}
+
 .comments-container {
     width: 500px; 
     height: 670px;
@@ -24,6 +33,18 @@ body {
     position: absolute;
     top: 5px; 
     left: 5px; 
+}
+
+.comments-container input[type="comment"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 300px; /* Задайте желаемую ширину инпутов */
+}
+
+input[type="comments"]:last-child {
+    margin-bottom: 0;
 }
 
 .status-container {
@@ -54,9 +75,9 @@ body {
     right: 20px; 
 }
 
-input[type="text"] {
+input[type="link"] {
     padding: 10px;
-    border: none;
+    border: 300px;
     border-radius: 5px;
     margin-right: 10px;
 }
@@ -64,6 +85,18 @@ input[type="text"] {
 button {
     padding: 10px 25px;
     border: none;
+    margin-left: 10px; 
+    border-radius: 5px;
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button adds{
+    padding: 10px 25px;
+    border: none;
+    margin-left: 50px; 
     border-radius: 5px;
     background-color: #555;
     color: #fff;
@@ -73,14 +106,4 @@ button {
 
 button:hover {
     background-color: #777;
-}
-
-button create-conteiner-input{
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #555;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
