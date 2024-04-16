@@ -44,9 +44,7 @@ function GetInput(){
 addCommentButton.addEventListener('click', addCommentInput);
 
 startButton.addEventListener('click', () => {
-    console.log(GetInput())
-    console.log(innerWidth) 
-    console.log(innerHeight) 
+
     const inputValue = linkInput.value.trim(); // Получаем значение из поля ввода и удаляем лишние пробелы
     var response = 0
     if(startButton.innerHTML == "Стоп"){
@@ -56,7 +54,7 @@ startButton.addEventListener('click', () => {
     }else{
         if (inputValue) { // Получаемый ответ с сервера, 
             // Если поле ввода не пустое, отправляем запрос на сервер и обрабатываем ответ
-            // Предположим, что мы получили ответ 1 (успех)
+            console.log(GetInput())
             response = 1;
 
             // Изменяем цвет индикатора в зависимости от ответа
