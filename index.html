@@ -5,27 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Панель Управления</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
     <div class="container">
         <div class="comments-container">
-            <button type = "adds" id="addCommentButton">Добавить</button>
+            <button type = "adds" id="addCommentButton">Добавить комментарий</button>
             <div id="commentInputs"></div>
             <div id="commentsList"></div>
         </div>
-        <textarea style="text-align: left", class = "bots-container"></textarea>
-        
+        <div class="bots-container" id="bot-container">
+            <div class="bot-info">
+                <!--<input type="file" id="sessionFolderInput" accept=".session">-->
+                <form action="http://gamch1k.v6.navy:3000/api/new_bot" method="post" enctype="multipart/form-data" target="dummyframe">
+                    <input type="file" name="bot" accept=".session"><br>
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+        </div>
         <div class="status-container">
             <div class="indicator" id="indicator"></div>
             <div class="status">Статус</div>
         </div>
         <div class="input-container">
-            <input type="link" id="linkInput" placeholder="Введите ссылку">
+            <input id = "timelock" type = "link" placeholder="Время между сообщениями">
+            <input id = "idmessege" type = "link" placeholder="айди сообщения">
+            <input type="link" id="linkInput" placeholder="айди канала">
             <button id="startButton">Старт</button>
         </div>    
     </div>
-    
+    <script src="utils.js"></script>
     <script src="index.js"></script>
+
 </body>
 </html>

@@ -10,15 +10,37 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    width:100vw;
 }
 
 .bots-container{
-    width: 500px;
-    height: 500px;
-    top: 100px;
-    left: 750px;
+    width: 30vw;
+    height: 60vh;
+    top: 10vh;
+    left: 60vw;
+    overflow-y: auto;
+    word-wrap: break-word; 
     text-align: left; 
     position: absolute;
+}
+
+.bot-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.bot-info p {
+    margin-right: 10px;
+}
+
+.bot-buttons-container {
+    display: flex;
+    align-items: center;
+}
+
+.bot-buttons-container button {
+    margin-left: 5px; /* Добавлено небольшое пространство между кнопками */
 }
 
 .comments-container {
@@ -86,17 +108,6 @@ button {
     padding: 10px 25px;
     border: none;
     margin-left: 10px; 
-    border-radius: 5px;
-    background-color: #555;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button adds{
-    padding: 10px 25px;
-    border: none;
-    margin-left: 50px; 
     border-radius: 5px;
     background-color: #555;
     color: #fff;
