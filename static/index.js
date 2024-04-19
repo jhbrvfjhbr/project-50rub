@@ -9,6 +9,7 @@ const addBotButton = document.getElementById('addBotButton');
 const sessionFolderInput = document.getElementById('sessionFolderInput');
 const timeLock = document.getElementById('timelock')
 const messegeId = document.getElementById('idmessege')
+const CommContainer = document.getElementById('comments-container_id')
 
 
 
@@ -26,9 +27,14 @@ function getCookie(name) {
 }
 
 function displayBots(bots) {
-    bots.forEach(bot => {
+    bots.forEach((bot, index)  => {
         const botDiv = document.createElement('div');
         botDiv.classList.add('bot-info');
+
+
+        const indexBota = document.createElement('p');
+        indexBota.textContent = `${index+1}.` ; 
+        botDiv.appendChild(indexBota);
 
         const statusIndicator = document.createElement('p');
         statusIndicator.textContent = '⦿'
@@ -94,25 +100,47 @@ function GetBots() {
   xhr.send(data);
 };
 
+function updateCommentIds() {
+    const commentContainers = document.querySelectorAll('.comment-container');
+    commentContainers.forEach((container, index) => {
+        const commentId = container.querySelector('p');
+        commentId.textContent = index + 1;
+    });
+}
 // Функция для добавления комментария
 function addCommentInput() {
+    // Создаем контейнер для комментария
+    const commentContainer = document.createElement('div');
+    commentContainer.classList.add('comment-container');
+
+    // Создаем элемент для отображения id комментария
+    const commentId = document.createElement('p');
+    commentId.textContent = document.querySelectorAll('.comment-container').length + 1;
+
+    // Создаем input для комментария
     const commentInput = document.createElement('input');
     commentInput.type = 'comment';
     commentInput.placeholder = 'Введите комментарий';
-    commentInput.id = 'commentInput'; 
+    commentInput.id = "commentInput"
 
+    // Создаем кнопку для удаления комментария
     const deleteInputButton = document.createElement('button');
     deleteInputButton.textContent = 'Удалить';
 
     deleteInputButton.addEventListener('click', () => {
-        commentInputsContainer.removeChild(commentInput);
-        commentInputsContainer.removeChild(deleteInputButton);
+        // Удаляем весь контейнер комментария при клике на кнопку удаления
+        commentContainer.remove();
+        updateCommentIds();
     });
 
-    commentInputsContainer.appendChild(commentInput);
-    commentInputsContainer.appendChild(deleteInputButton);
+    // Добавляем элементы в контейнер комментария
+    commentContainer.appendChild(commentId);
+    commentContainer.appendChild(commentInput);
+    commentContainer.appendChild(deleteInputButton);
+    
 
-    document.querySelector('.comments-container').appendChild(commentInputs);
+    // Добавляем контейнер комментария в контейнер всех комментариев
+    CommContainer.appendChild(commentContainer);
     document.querySelector('.comments-container').appendChild(addCommentButton);
 }
 

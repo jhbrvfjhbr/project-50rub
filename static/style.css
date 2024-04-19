@@ -19,7 +19,7 @@ body {
     top: 10vh;
     left: 60vw;
     overflow-y: auto;
-    word-wrap: break-word; 
+     
     text-align: left; 
     position: absolute;
 }
@@ -51,6 +51,7 @@ body {
     word-wrap: break-word; 
     border: 1px solid #333; 
     padding: 10px; 
+    word-wrap: break-word;
     text-align: left; 
     position: absolute;
     top: 5px; 
@@ -64,6 +65,17 @@ body {
     margin-bottom: 10px;
     width: 300px; /* Задайте желаемую ширину инпутов */
 }
+
+.comment-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.comments-container p {
+    margin-right: 10px;
+}
+
 
 input[type="comments"]:last-child {
     margin-bottom: 0;
