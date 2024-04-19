@@ -107,39 +107,31 @@ function updateCommentIds() {
         commentId.textContent = index + 1;
     });
 }
-// Функция для добавления комментария
+
 function addCommentInput() {
-    // Создаем контейнер для комментария
     const commentContainer = document.createElement('div');
     commentContainer.classList.add('comment-container');
 
-    // Создаем элемент для отображения id комментария
     const commentId = document.createElement('p');
     commentId.textContent = document.querySelectorAll('.comment-container').length + 1;
 
-    // Создаем input для комментария
     const commentInput = document.createElement('input');
     commentInput.type = 'comment';
     commentInput.placeholder = 'Введите комментарий';
     commentInput.id = "commentInput"
 
-    // Создаем кнопку для удаления комментария
     const deleteInputButton = document.createElement('button');
     deleteInputButton.textContent = 'Удалить';
 
     deleteInputButton.addEventListener('click', () => {
-        // Удаляем весь контейнер комментария при клике на кнопку удаления
         commentContainer.remove();
         updateCommentIds();
     });
 
-    // Добавляем элементы в контейнер комментария
     commentContainer.appendChild(commentId);
     commentContainer.appendChild(commentInput);
     commentContainer.appendChild(deleteInputButton);
     
-
-    // Добавляем контейнер комментария в контейнер всех комментариев
     CommContainer.appendChild(commentContainer);
     document.querySelector('.comments-container').appendChild(addCommentButton);
 }
