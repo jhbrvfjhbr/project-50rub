@@ -18,13 +18,13 @@ function sendTokenToAPI() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function () {
       if (xhr.status === 202) {
-        if(window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).toLowerCase() === "login"){ //Это защита от крыс, что бы без токена не могли на панель зайти, а с токином в логин
-          window.location.href = 'index';
+        if(window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).toLowerCase() === "login.html"){ //Это защита от крыс, что бы без токена не могли на панель зайти, а с токином в логин
+          window.location.href = '/index.html';
         }
       } else if (xhr.status === 400) {
         console.error('Токен недействителен или истек срок его действия.');
-        if(window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).toLowerCase() === "index"){ //Что бы не писать разные фунции для страницы логина и панели админа, я сделал проверку на страницы
-          window.location.href = 'login'
+        if(window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).toLowerCase() === "index.html"){ //Что бы не писать разные фунции для страницы логина и панели админа, я сделал проверку на страницы
+          window.location.href = '/login.html'
         }
       } else {
         console.error('Ошибка при проверке токена:', xhr.status);
@@ -41,8 +41,8 @@ function sendTokenToAPI() {
     xhr.send(data);
   } else {
     console.error('Токен не найден в куки.');
-    if(window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).toLowerCase() === "index"){
-      window.location.href = 'login'
+    if(window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1).toLowerCase() === "index.html"){
+      window.location.href = '/login.html'
     }
   }
 }

@@ -169,5 +169,5 @@ startButton.addEventListener('click', () => {
 
 
 document.addEventListener('DOMContentLoaded', GetBots());
-setInterval(GetStatus, 5000);
+setInterval(GetStatus, 1000);
 
