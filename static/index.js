@@ -12,7 +12,10 @@ const messegeId = document.getElementById('idmessege')
 const CommContainer = document.getElementById('comments-container_id')
 
 
-
+function getToggleValue() {
+    const toggle = document.getElementById('toggle');
+    return toggle.checked ? true : false;
+}
 
 function getCookie(name) {
   	let cookies = document.cookie.split(';');
@@ -80,7 +83,7 @@ function displayBots(bots) {
 function GetBots() {
   let token = getCookie('token')
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://gamch1k.v6.navy:3000/api/bots', true);
+  xhr.open('POST', '/api/bots', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -138,7 +141,7 @@ function addCommentInput() {
 
 function GetStatus(){
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://gamch1k.v6.navy:3000/api/status', true);
+	xhr.open('GET', '/api/status', true);
 	xhr.onload = function () {
 		console.log(JSON.parse(xhr.responseText))
         indicator.style.backgroundColor = JSON.parse(xhr.responseText) ? 'green' : 'red';
@@ -167,7 +170,7 @@ startButton.addEventListener('click', () => {
 
         console.log("start");
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://gamch1k.v6.navy:3000/api/start', true);
+        xhr.open('POST', '/api/start', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
 
         let data = JSON.stringify({
@@ -175,7 +178,8 @@ startButton.addEventListener('click', () => {
             "link": linkInput.value.trim(),
             "msg_id": Number(messegeId.value.trim()),
             "sleep": Number(timeLock.value.trim()),
-            "token": getCookie("token")
+            "token": getCookie("token"),
+            "random": getToggleValue()
         });
 
         console.log(data);

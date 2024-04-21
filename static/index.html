@@ -16,10 +16,23 @@
         <div class="bots-container" id="bot-container">
             <div class="bot-info">
                 <!--<input type="file" id="sessionFolderInput" accept=".session">-->
-                <form action="http://gamch1k.v6.navy:3000/api/new_bot" method="post" enctype="multipart/form-data" target="dummyframe">
+                <form action="/api/new_bot" method="post" enctype="multipart/form-data" target="dummyframe">
                     <input type="file" name="bot" accept=".session"><br>
                     <input type="submit" value="Upload">
                 </form>
+            </div>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle-container-1">
+                <p>Способ отправки сообщения.</p>
+            </div>
+            <div class="toggle-container-2">
+                <p>По-порядку</p>
+                <div class="toggle-switch">    
+                    <input type="checkbox" id="toggle" class="toggle-checkbox">
+                    <label for="toggle" class="toggle-label"></label>    
+                </div>
+                <p>Рандом</p>
             </div>
         </div>
         <div class="status-container">
@@ -27,6 +40,7 @@
             <div class="status">Статус</div>
         </div>
         <div class="input-container">
+            
             <input id = "timelock" type = "link" placeholder="Время между сообщениями">
             <input id = "idmessege" type = "link" placeholder="айди сообщения">
             <input type="link" id="linkInput" placeholder="айди канала">

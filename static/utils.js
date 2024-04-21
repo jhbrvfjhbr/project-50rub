@@ -14,7 +14,7 @@ function sendTokenToAPI() {
   let token = getCookie('token');
   if (token) {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://gamch1k.v6.navy:3000/api/check_token', true);
+    xhr.open('POST', '/api/check_token', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function () {
       if (xhr.status === 202) {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', sendTokenToAPI)
 
 function loginToAPI(login, password) {
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://gamch1k.v6.navy:3000/api/login', true);
+  xhr.open('POST', '/api/login', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     if (xhr.status === 202) {
@@ -92,7 +92,7 @@ function loginToAPI(login, password) {
 
 function BotEdit(id, name, token) {
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://gamch1k.v6.navy:3000/api/bot_change_name', true);
+  xhr.open('POST', '/api/bot_change_name', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     if (xhr.status === 202) {
@@ -118,7 +118,7 @@ function BotEdit(id, name, token) {
 
 function BotDELETE(id, token) {
   let xhr = new XMLHttpRequest();
-  xhr.open('DELETE', 'http://gamch1k.v6.navy:3000/api/bot', true);
+  xhr.open('DELETE', '/api/bot', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = function () {
     if (xhr.status === 202) {
@@ -143,7 +143,7 @@ function BotDELETE(id, token) {
 
 function BotADD(id, token) {
   let xhr = new XMLHttpRequest();
-  xhr.open('DELETE', 'http://gamch1k.v6.navy:3000/api/new_bot', true);
+  xhr.open('DELETE', '/api/new_bot', true);
   xhr.setRequestHeader('Content-Type', 'session');
   xhr.onload = function () {
     if (xhr.status === 202) {
