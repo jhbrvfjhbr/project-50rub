@@ -1,15 +1,14 @@
 const startButton = document.getElementById('startButton');
 const indicator = document.getElementById('indicator');
-const linkInput = document.getElementById('linkInput');
 const addCommentButton = document.getElementById('addCommentButton');
-const commentsList = document.getElementById('commentsList');
 const commentInputsContainer = document.getElementById('commentInputs');
 const botContainer = document.getElementById('bot-container')
 const addBotButton = document.getElementById('addBotButton');
 const sessionFolderInput = document.getElementById('sessionFolderInput');
 const timeLock = document.getElementById('timelock')
-const messegeId = document.getElementById('idmessege')
 const CommContainer = document.getElementById('comments-container_id')
+const linksContainer = document.getElementById('links-container_id')
+const addLinkButton = document.getElementById('addLinkButton')
 
 
 function getToggleValue() {
@@ -139,6 +138,42 @@ function addCommentInput() {
     document.querySelector('.comments-container').appendChild(addCommentButton);
 }
 
+function updateLinkIds() {
+    const linkContainers = document.querySelectorAll('.link-container');
+    linkContainers.forEach((container, index) => {
+        const linkId = container.querySelector('p');
+        linkId.textContent = index + 1;
+    });
+}
+
+function addLinkInput() {
+    const linkContainer = document.createElement('div');
+    linkContainer.classList.add('link-container');
+
+    const linkId = document.createElement('p');
+    linkId.textContent = document.querySelectorAll('.link-container').length + 1;
+
+    const linkInput = document.createElement('input');
+    linkInput.type="inputlink";
+    linkInput.placeholder = 'Введите ссылку';
+    linkInput.id = "linkInput";
+
+    const deleteLinkButton = document.createElement('button');
+    deleteLinkButton.textContent = 'Удалить';
+
+    deleteLinkButton.addEventListener('click', () => {
+        linkContainer.remove();
+        updateLinkIds();
+    });
+
+    linkContainer.appendChild(linkId);
+    linkContainer.appendChild(linkInput);
+    linkContainer.appendChild(deleteLinkButton);
+    
+    linksContainer.appendChild(linkContainer);
+    document.querySelector('.links-container').appendChild(addLinkButton);
+}
+
 function GetStatus(){
 	let xhr = new XMLHttpRequest();
 	xhr.open('GET', '/api/status', true);
@@ -162,11 +197,24 @@ function GetInput(){
     return comments;
 }
 
+function GetLinks(){
+    let links = [];
+    let inputs = Array.from(document.querySelectorAll('input'));
+
+    for(let i = 0; i < inputs.length; i++){
+        if(inputs[i].id === "linkInput" && inputs[i].value !== ''){
+            links.push(inputs[i].value);
+        }
+    }
+    return links;
+}
+// Обработчик события клика на кнопку добавления ссылки
+addLinkButton.addEventListener('click', addLinkInput);
 // Обработчик события клика на кнопку добавления комментария
 addCommentButton.addEventListener('click', addCommentInput);
 
 startButton.addEventListener('click', () => {
-    if (linkInput.value.trim() !== null && messegeId.value.trim() !== null) {
+    if (GetLinks().length > 0 && GetInput().length > 0) {
 
         console.log("start");
         let xhr = new XMLHttpRequest();
@@ -175,8 +223,7 @@ startButton.addEventListener('click', () => {
 
         let data = JSON.stringify({
             "comments": GetInput(),
-            "link": linkInput.value.trim(),
-            "msg_id": Number(messegeId.value.trim()),
+            "links": GetLinks(),
             "sleep": Number(timeLock.value.trim()),
             "token": getCookie("token"),
             "random": getToggleValue()
@@ -187,7 +234,7 @@ startButton.addEventListener('click', () => {
         xhr.send(data);
 
     }else{
-  		alert("Убедитесь что ссылки правильно указаны")
+  		alert("Убедитесь что всё заполнено")
   	};
 });
 

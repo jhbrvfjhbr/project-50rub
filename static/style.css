@@ -9,8 +9,8 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width:100vw;
+    height:200vh;
+    width:98vw;
 }
 
 .bots-container{
@@ -46,21 +46,17 @@ body {
     width: 40vw; 
     height: 80vh;
     overflow-y: auto;
-    margin-bottom: 10px;
     word-wrap: break-word; 
-    word-wrap: break-word;
-    text-align: left; 
     position: absolute;
     top:10px;
     left:10px;
 }
 
-.comments-container input[type="comment"] {
+input[type="comment"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 10px;
-    width: 300px; /* Задайте желаемую ширину инпутов */
+    width: 1000px;
 }
 
 .comment-container {
@@ -73,9 +69,55 @@ body {
     margin-right: 10px;
 }
 
-
 input[type="comments"]:last-child {
     margin-bottom: 0;
+}
+
+.links-container {
+    width: 40vw; 
+    height: 80vh;
+    overflow-y: auto;
+    word-wrap: break-word;
+    position: absolute;
+    top:100vh;
+    left:10px;
+}
+
+input[type="inputLink"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 1000px;
+}
+
+.link-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+
+
+.link-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.link-container p {
+    margin-right: 10px;
+}
+
+input[type="links"]:last-child {
+    margin-bottom: 0;
+}
+
+input[type="link"] {
+    width: 8vw;
+    padding: 10px;
+    border: 300px;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 
 .status-container {
@@ -104,13 +146,6 @@ input[type="comments"]:last-child {
     position: absolute; 
     bottom: 20px; 
     right: 20px; 
-}
-
-input[type="link"] {
-    padding: 10px;
-    border: 300px;
-    border-radius: 5px;
-    margin-right: 10px;
 }
 
 button {
@@ -175,8 +210,7 @@ button:hover {
 
 .toggle-container {
     width: 40vw;
-    height: 13vh;
-    padding:10px;
+    height: 12vh;
     display: flex;
     position: absolute; 
     bottom: 20px;
