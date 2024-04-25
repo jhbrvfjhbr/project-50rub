@@ -214,7 +214,7 @@ addLinkButton.addEventListener('click', addLinkInput);
 addCommentButton.addEventListener('click', addCommentInput);
 
 startButton.addEventListener('click', () => {
-    if (GetLinks().length > 0 && GetInput().length > 0) {
+    if (GetLinks().length > 0 && GetInput().length > 0 && startButton.innerHTML == 'Старт' && Number(timeLock.value.trim()) > 0) {
 
         console.log("start");
         let xhr = new XMLHttpRequest();
@@ -232,9 +232,11 @@ startButton.addEventListener('click', () => {
         console.log(data);
         
         xhr.send(data);
-
+    }else if (startButton.textContent == "Стоп"){
+        //тут добавить запрос на стоп.
+        alert("Стоп");
     }else{
-  		alert("Убедитесь что всё заполнено")
+  		alert("Убедитесь что всё заполнено");
   	};
 });
 
