@@ -91,9 +91,9 @@ function GetBots() {
       displayBots(botss)
     }
     else if (xhr.status === 400) {
-      ('Ошибка: ' + xhr.responseText, null); // Вызовите обратный вызов с сообщением об ошибке
+        console.error('Ошибка: ' + xhr.responseText, null); // Вызовите обратный вызов с сообщением об ошибке
     } else {
-      ('Ошибка при проверке токена: ' + xhr.status, null); // Вызовите обратный вызов с сообщением об ошибке
+        console.error('Ошибка при проверке токена: ' + xhr.status, null); // Вызовите обратный вызов с сообщением об ошибке
     };
   };
   let data = JSON.stringify({
@@ -221,6 +221,16 @@ startButton.addEventListener('click', () => {
         xhr.open('POST', '/api/start', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
 
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log('Старт');
+            }
+            else if (xhr.status === 400) {
+                console.error('Ошибка: ' + xhr.responseText, null); // Вызовите обратный вызов с сообщением об ошибке
+            } else {
+                console.error('Ошибка: ' + xhr.status, null); // Вызовите обратный вызов с сообщением об ошибке
+            };
+          };
         let data = JSON.stringify({
             "comments": GetInput(),
             "links": GetLinks(),
@@ -233,8 +243,23 @@ startButton.addEventListener('click', () => {
         
         xhr.send(data);
     }else if (startButton.textContent == "Стоп"){
-        //тут добавить запрос на стоп.
-        alert("Стоп");
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/stop', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = function (){
+            if (xhr.status === 202) {
+                console.log('Стоп')
+            } else {
+                console.error('Ошибка: ' + xhr.status, null); 
+            };
+        };
+
+        let data = JSON.stringify({
+            "token": getCookie("token"),
+        });
+        xhr.send(data);
+
     }else{
   		alert("Убедитесь что всё заполнено");
   	};
