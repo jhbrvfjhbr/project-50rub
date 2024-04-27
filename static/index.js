@@ -10,7 +10,6 @@ const CommContainer = document.getElementById('comments-container_id')
 const linksContainer = document.getElementById('links-container_id')
 const addLinkButton = document.getElementById('addLinkButton')
 
-
 function getToggleValue() {
     const toggle = document.getElementById('toggle');
     return toggle.checked ? true : false;
@@ -158,6 +157,11 @@ function addLinkInput() {
     linkInput.placeholder = 'Введите ссылку';
     linkInput.id = "linkInput";
 
+    const messageIdInput = document.createElement('input');
+    messageIdInput.type="inputlink";
+    messageIdInput.placeholder = 'Введите айди';
+    messageIdInput.id = "messageInput";
+
     const deleteLinkButton = document.createElement('button');
     deleteLinkButton.textContent = 'Удалить';
 
@@ -168,6 +172,7 @@ function addLinkInput() {
 
     linkContainer.appendChild(linkId);
     linkContainer.appendChild(linkInput);
+    linkContainer.appendChild(messageIdInput)
     linkContainer.appendChild(deleteLinkButton);
     
     linksContainer.appendChild(linkContainer);
@@ -199,22 +204,31 @@ function GetInput(){
 
 function GetLinks(){
     let links = [];
-    let inputs = Array.from(document.querySelectorAll('input'));
+    let linkContainers = document.querySelectorAll('.link-container');
 
-    for(let i = 0; i < inputs.length; i++){
-        if(inputs[i].id === "linkInput" && inputs[i].value !== ''){
-            links.push(inputs[i].value);
+    linkContainers.forEach(container => {
+        let linkInput = container.querySelector('input[id="linkInput"]');
+        let messageInput = container.querySelector('input[id="messageInput"]');
+        
+        if (linkInput.value !== '') {
+            let linkObj = {
+                link: linkInput.value,
+                message_Id: messageInput.value !== '' ? parseInt(messageInput.value) : -1
+            };
+            links.push(linkObj);
         }
-    }
+    });
+    
     return links;
 }
+
 // Обработчик события клика на кнопку добавления ссылки
 addLinkButton.addEventListener('click', addLinkInput);
 // Обработчик события клика на кнопку добавления комментария
 addCommentButton.addEventListener('click', addCommentInput);
 
 startButton.addEventListener('click', () => {
-    if (GetLinks().length > 0 && GetInput().length > 0 && startButton.innerHTML == 'Старт' && Number(timeLock.value.trim()) > 0) {
+    if (GetLinks().length > 0 && GetInput().length > 0 && startButton.innerHTML == 'Старт') {
 
         console.log("start");
         let xhr = new XMLHttpRequest();
@@ -234,7 +248,7 @@ startButton.addEventListener('click', () => {
         let data = JSON.stringify({
             "comments": GetInput(),
             "links": GetLinks(),
-            "sleep": Number(timeLock.value.trim()),
+            "sleep": Number(timeLock.value.trim()) ? Number(timeLock.value.trim()) : 10,
             "token": getCookie("token"),
             "random": getToggleValue()
         });

@@ -88,6 +88,7 @@ input[type="inputLink"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 1000px;
+    margin: 5px;
 }
 
 .link-container {
