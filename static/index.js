@@ -213,7 +213,7 @@ function GetLinks(){
         if (linkInput.value !== '') {
             let linkObj = {
                 link: linkInput.value,
-                message_Id: messageInput.value !== '' ? parseInt(messageInput.value) : -1
+                message_id: messageInput.value !== '' ? parseInt(messageInput.value) : -1
             };
             links.push(linkObj);
         }
