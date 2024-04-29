@@ -42,6 +42,29 @@ body {
     margin-left: 5px; /* Добавлено небольшое пространство между кнопками */
 }
 
+.bot-status-index-container {
+    display:flex;
+    justify-content: space-between;
+    width: 50px;
+}
+
+.object1 {
+    width: 30px;
+    flex-grow: 0; /* Запрещаем контейнеру увеличиваться по размеру */
+    flex-shrink: 0; /* Запрещаем контейнеру уменьшаться по размеру */
+}
+
+.object2 {
+    width: 20px;
+    flex-grow: 0; /* Запрещаем контейнеру увеличиваться по размеру */
+    flex-shrink: 0; /* Запрещаем контейнеру уменьшаться по размеру */
+}
+.object3{
+    max-width: 30%;
+    overflow: hidden;
+}
+
+
 .comments-container {
     width: 40vw; 
     height: 40vh;
@@ -57,6 +80,18 @@ input[type="comment"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 1000px;
+}
+button[type = "adds"]{
+    margin-top:5px;
+}
+textarea.comment-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 1000px;
+    margin:5px;
+    resize: none;
+    overflow: hidden;
 }
 
 .comment-container {

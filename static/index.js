@@ -32,48 +32,61 @@ function displayBots(bots) {
         const botDiv = document.createElement('div');
         botDiv.classList.add('bot-info');
 
+        // Статус-индекс контейнер
+        const statusIndex = document.createElement('div');
+        statusIndex.classList.add('bot-status-index-container');
 
         const indexBota = document.createElement('p');
-        indexBota.textContent = `${index+1}.` ; 
-        botDiv.appendChild(indexBota);
+        indexBota.textContent = `${index+1}.`;
+        const indexBotaContainer = document.createElement('div');
+        indexBotaContainer.classList.add('object1');
+        indexBotaContainer.appendChild(indexBota);
+        
+        statusIndex.appendChild(indexBotaContainer);
 
         const statusIndicator = document.createElement('p');
-        statusIndicator.textContent = '⦿'
+        statusIndicator.textContent = '⦿';
         statusIndicator.style.color = bot.Status ? 'green' : 'red';
-        botDiv.appendChild(statusIndicator);
+        const statusIndicatorContainer = document.createElement('div');
+        statusIndicatorContainer.classList.add('object2');
+        statusIndicatorContainer.appendChild(statusIndicator);
 
+        statusIndex.appendChild(statusIndicatorContainer);
+
+        botDiv.appendChild(statusIndex);
+
+        // Имя бота
+        const botNameContainer = document.createElement('div');
+        botNameContainer.classList.add('object3');
         const botName = document.createElement('p');
         botName.textContent = `${bot.Name}`;
-        botDiv.appendChild(botName);
+        botNameContainer.appendChild(botName);
+        botDiv.appendChild(botNameContainer);
 
-        //Кнопка едит
+        // Кнопки
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('bot-buttons-container');
+
         const editButton = document.createElement('button');
         editButton.textContent = 'Изменить';
-
         editButton.addEventListener('click', () => {
             const newName = prompt("Введите новое имя для бота:", bot.Name);
             bot.Name = newName.trim();
             botName.textContent = `${bot.Name}`;
             BotEdit(bot.Id, bot.Name, getCookie("token"));
         });
+        buttonsContainer.appendChild(editButton);
 
-        //Кнопка делит
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Удалить';
-
         deleteButton.addEventListener('click', () => {
             BotDELETE(bot.Id, getCookie("token"));
-            
         });
-
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.classList.add('bot-buttons-container'); // Добавляем класс для стилизации
-
-        buttonsContainer.appendChild(editButton);
         buttonsContainer.appendChild(deleteButton);
 
         botDiv.appendChild(buttonsContainer);
 
+        // Добавляем бот-контейнер в основной контейнер
         botContainer.appendChild(botDiv);
     });
 }
@@ -116,11 +129,18 @@ function addCommentInput() {
     const commentId = document.createElement('p');
     commentId.textContent = document.querySelectorAll('.comment-container').length + 1;
 
-    const commentInput = document.createElement('input');
-    commentInput.type = 'comment';
+    const commentInput = document.createElement('textarea');
+    commentInput.classList.add('comment-input');
+    commentInput.rows = 1;
     commentInput.placeholder = 'Введите комментарий';
-    commentInput.id = "commentInput"
+    commentInput.id = "commentInput";
 
+    commentInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.padding = '5px';
+        this.style.height = this.scrollHeight + 'px';
+      });
+    
     const deleteInputButton = document.createElement('button');
     deleteInputButton.textContent = 'Удалить';
 
@@ -133,8 +153,16 @@ function addCommentInput() {
     commentContainer.appendChild(commentInput);
     commentContainer.appendChild(deleteInputButton);
     
-    CommContainer.appendChild(commentContainer);
+    document.querySelector('.comments-container').appendChild(commentContainer);
     document.querySelector('.comments-container').appendChild(addCommentButton);
+}
+
+function updateCommentIds() {
+    const commentContainers = document.querySelectorAll('.comment-container');
+    commentContainers.forEach((container, index) => {
+        const commentId = container.querySelector('p');
+        commentId.textContent = index + 1;
+    });
 }
 
 function updateLinkIds() {
@@ -190,13 +218,13 @@ function GetStatus(){
 	xhr.send(null);
 }
 
-function GetInput(){
+function GetInput() {
     let comments = [];
-    let inputs = Array.from(document.querySelectorAll('input'));
+    let textareas = Array.from(document.querySelectorAll('textarea')); // Изменено на textarea
 
-    for(let i = 0; i < inputs.length; i++){
-        if(inputs[i].id === "commentInput" && inputs[i].value !== ''){
-            comments.push(inputs[i].value);
+    for (let i = 0; i < textareas.length; i++) { // Изменено на textarea
+        if (textareas[i].id === "commentInput" && textareas[i].value.trim() !== '') { // Изменено на textarea и добавлен trim() для удаления лишних пробелов
+            comments.push(textareas[i].value);
         }
     }
     return comments;
